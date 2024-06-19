@@ -19,3 +19,21 @@ def test_read_root_should_return_hello_world():
     response = client.get('/')
 
     assert response.json() == {'message': 'Hello world!'}
+
+
+def test_get_hello_world_html():
+    client = TestClient(app)
+
+    response = client.get('/hello-world')
+
+    expected_html = """
+    <html>
+      <head>
+        <title> Nosso olá mundo!</title>
+      </head>
+      <body>
+        <h1>olá mundo</h1>
+      </body>
+    </html>"""
+
+    assert response.text.strip() == expected_html.strip()
